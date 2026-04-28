@@ -32,7 +32,10 @@ const NotificationsRoutes = require("./src/routes/NotificationsRoutes");
 
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: [
+      "http://localhost:5173",
+      "https://care24-frontend-muc6.vercel.app/",
+    ],
     credentials: true,
   }),
 );
