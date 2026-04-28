@@ -70,7 +70,7 @@ const registerUser = async (req, res) => {
 
       sameSite: "none",
     });
-    res.status(201).json({ message: "User registered successfully" });
+    res.status(201).json({ message: "User registered successfully", token });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Server error" });
@@ -110,7 +110,7 @@ const loginUser = async (req, res) => {
       maxAge: 7 * 24 * 60 * 60 * 1000,
       sameSite: "none",
     });
-    res.status(200).json({ message: "Login successful" });
+    res.status(200).json({ message: "Login successful", token });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Server error" });
@@ -187,12 +187,12 @@ const AdminLogin = async (req, res) => {
     );
     res.cookie("token", token, {
       httpOnly: true,
-      secure: false,
+      secure: true,
       maxAge: 7 * 24 * 60 * 60 * 1000,
       sameSite: "none",
     });
 
-    res.status(200).json({ message: "Login successful", success: true });
+    res.status(200).json({ message: "Login successful", success: true, token });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Server error" });
