@@ -68,7 +68,7 @@ const registerUser = async (req, res) => {
       secure: true,
       maxAge: 7 * 24 * 60 * 60 * 1000,
 
-      sameSite: "lax",
+      sameSite: "none",
     });
     res.status(201).json({ message: "User registered successfully" });
   } catch (error) {
@@ -108,7 +108,7 @@ const loginUser = async (req, res) => {
       httpOnly: true,
       secure: true,
       maxAge: 7 * 24 * 60 * 60 * 1000,
-      sameSite: "lax",
+      sameSite: "none",
     });
     res.status(200).json({ message: "Login successful" });
   } catch (error) {
@@ -189,7 +189,7 @@ const AdminLogin = async (req, res) => {
       httpOnly: true,
       secure: false,
       maxAge: 7 * 24 * 60 * 60 * 1000,
-      sameSite: "lax",
+      sameSite: "none",
     });
 
     res.status(200).json({ message: "Login successful", success: true });
