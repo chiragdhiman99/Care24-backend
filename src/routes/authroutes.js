@@ -28,7 +28,8 @@ router.get("/users", getAllUsers);
 router.get("/verify", verifyUser);
 
 router.post("/logout", (req, res) => {
-  res.clearCookie("token", { path: "/" });
+  res.clearCookie("token", { path: "/", sameSite: "none", secure: true });
+
   res.status(200).json({ message: "Logout successful" });
 });
 
