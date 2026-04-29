@@ -32,8 +32,6 @@ router.post("/logout", (req, res) => {
   res.status(200).json({ message: "Logout successful" });
 });
 
-// google login
-
 router.get("/google", (req, res, next) => {
   const role = req.query.role;
   passport.authenticate("google", {
@@ -41,8 +39,6 @@ router.get("/google", (req, res, next) => {
     state: role,
   })(req, res, next);
 });
-
-// google callback
 
 router.get(
   "/google/callback",
@@ -95,7 +91,7 @@ router.get(
 );
 router.get("/me", (req, res) => {
   try {
-    const token = req.cookies.token;
+    const token = req.cookies.token || req.headers.authorization?.split(" ")[1];
     if (!token) return res.status(401).json({ message: "Not logged in" });
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
