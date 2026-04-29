@@ -85,11 +85,11 @@ router.get(
         });
         await newCaregiver.save();
       }
-      res.redirect(`${FRONTEND_URL}/caregiver-dashboard`);
+      res.redirect(`${FRONTEND_URL}/caregiver-dashboard?token=${token}`);
     } else if (role === "family") {
-      res.redirect(`${FRONTEND_URL}/dashboard`);
+      res.redirect(`${FRONTEND_URL}/dashboard?token=${token}`);
     } else {
-      res.redirect(`${FRONTEND_URL}/`);
+      res.redirect(`${FRONTEND_URL}/?token=${token}`);
     }
   },
 );
