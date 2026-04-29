@@ -34,7 +34,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:5173",
-      "https://care24-frontend-muc6.vercel.app",
+      "https://care24-frontend-tjrg.vercel.app",
     ],
     credentials: true,
   }),

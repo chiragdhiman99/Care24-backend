@@ -16,7 +16,7 @@ const {
 const passport = require("passport");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
-const FRONTEND_URL = process.env.CLIENT_URL || "http://localhost:5173";
+const FRONTEND_URL = process.env.CLIENT_URL;
 
 router.post("/register", registerUser);
 router.post("/login", loginUser);
