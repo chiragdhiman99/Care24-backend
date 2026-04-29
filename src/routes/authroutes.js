@@ -16,6 +16,7 @@ const {
 const passport = require("passport");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
+const FRONTEND_URL = process.env.CLIENT_URL || "http://localhost:5173";
 
 router.post("/register", registerUser);
 router.post("/login", loginUser);
@@ -68,8 +69,9 @@ router.get(
 
     res.cookie("token", token, {
       httpOnly: true,
+      secure: true,
       maxAge: 7 * 24 * 60 * 60 * 1000,
-      sameSite: "lax",
+      sameSite: "none",
     });
 
     if (role === "caregiver") {
@@ -83,11 +85,11 @@ router.get(
         });
         await newCaregiver.save();
       }
-      res.redirect("http://localhost:5173/caregiver-dashboard");
+      res.redirect(`${FRONTEND_URL}/caregiver-dashboard`);
     } else if (role === "family") {
-      res.redirect("http://localhost:5173/dashboard");
+      res.redirect(`${FRONTEND_URL}/dashboard`);
     } else {
-      res.redirect("http://localhost:5173/");
+      res.redirect(`${FRONTEND_URL}/`);
     }
   },
 );
