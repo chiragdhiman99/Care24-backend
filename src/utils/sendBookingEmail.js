@@ -1,5 +1,12 @@
-const transporter = require("./mailer");
+const nodemailer = require("nodemailer");
 
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS,
+  },
+});
 const sendBookingConfirmationEmail = async ({
   toEmail,
   patientName,
@@ -12,7 +19,7 @@ const sendBookingConfirmationEmail = async ({
   method,
   transactionId,
 }) => {
-  const mailOptions = {
+  await transporter.sendMail({
     from: `"Care24" <${process.env.EMAIL_USER}>`,
     to: toEmail,
     subject: `Booking Confirmed — ${bookingId}`,
@@ -88,9 +95,7 @@ const sendBookingConfirmationEmail = async ({
 
       </div>
     `,
-  };
-
-  await transporter.sendMail(mailOptions);
+  });
 };
 
 module.exports = sendBookingConfirmationEmail;
