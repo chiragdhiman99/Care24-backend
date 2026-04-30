@@ -58,6 +58,10 @@ router.post("/verify-payment", async (req, res) => {
     transactionId,
   } = req.body;
 
+  console.log("🔥 verify-payment hit!");
+  console.log("📧 toEmail:", toEmail);
+  console.log("📧 req.body:", req.body);
+
   const signature = razorpay_order_id + "|" + razorpay_payment_id;
   const expectedSignature = crypto
     .createHmac("sha256", process.env.RAZORPAY_KEY_SECRET)
@@ -176,7 +180,9 @@ router.post("/verify-payment", async (req, res) => {
           date,
         });
       }
-    } catch (err) {}
+    } catch (err) {
+      console.error("❌ Booking error:", err);
+    }
 
     res.status(200).json({ success: true, message: "Payment successful" });
 
@@ -192,8 +198,8 @@ router.post("/verify-payment", async (req, res) => {
       method: method || "UPI",
       transactionId: transactionId || razorpay_payment_id,
     })
-      .then(() => {})
-      .catch((emailErr) => {});
+      .then(() => console.log("✅ Email sent to:", toEmail))
+      .catch((emailErr) => console.error("❌ Email error:", emailErr.message));
   } else {
     res.status(400).json({ success: false, message: "Payment failed" });
   }

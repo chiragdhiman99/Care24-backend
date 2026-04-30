@@ -17,13 +17,13 @@ const caregiverSchema = new mongoose.Schema(
     image: String,
     phone: {
       type: String,
-      required: true,
+      required: "",
     },
     email: String,
     city: String,
     experience: {
       type: Number,
-      required: true,
+      required: 0,
     },
 
     bio: {
@@ -55,11 +55,11 @@ const caregiverSchema = new mongoose.Schema(
 
     hourlyRate: {
       type: Number,
-      required: true,
+      required: 0,
     },
     dailyRate: {
       type: Number,
-      required: true,
+      required: 0,
     },
 
     available: {
