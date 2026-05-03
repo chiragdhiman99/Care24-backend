@@ -65,6 +65,11 @@ app.use("/api/user-queries", UserQueriesRoutes);
 app.use("/api/reviews", ReviewsRoutes);
 app.use("/images", express.static(__dirname + "/images"));
 app.use("/uploads", express.static(__dirname + "/uploads"));
+
+app.get('/', (req, res) => {
+  res.status(200).json({ status: 'ok', message: 'Care24 server is running' })
+})
+
 const PORT = process.env.PORT || 5001;
 
 const server = http.createServer(app);
